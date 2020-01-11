@@ -1,10 +1,9 @@
 package com.example.ocr.Repository;
-import org.springframework.stereotype.Repository;
 import com.example.ocr.Model.OcrUser;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OcrUserRepositoryextends CrudRepository<OcrUser,String> {
+public interface OcrUserRepository extends CrudRepository<OcrUser,String> {
     OcrUser findOcrUsersByUsername(String username);
-
 }
