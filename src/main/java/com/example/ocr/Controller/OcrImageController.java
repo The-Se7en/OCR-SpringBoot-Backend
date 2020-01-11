@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 
 @RestController
@@ -34,14 +37,12 @@ public class OcrImageController {
             }else
             {
                 byte[] imageBytes = file.getBytes();
-                String fileDirPath = "C:\\Users\\Home\\Documents\\OMG\\images";
-                File fileDir = new File(fileDirPath);
-                File dest = new File(fileDir,  file.getOriginalFilename());
-                file.transferTo(dest);
-                //OcrImage image=new OcrImage(1,"amal",fileDir.toString()+"\\"+file.getOriginalFilename());
-                OcrImage image=new OcrImage(1,"amal",dest.toString());
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
+                BufferedImage bImage2 = ImageIO.read(bis);
+                String path="C:\\Users\\Home\\Documents\\OMG\\images\\"+file.getOriginalFilename();
+                ImageIO.write(bImage2, "jpg", new File(path) );
+                OcrImage image=new OcrImage(1,"amal",path);
                 ocrImageRepository.save(image);
-
                 File fileImag=new File(image.getImgPath());
                 ITesseract ins=new Tesseract();
                 try{
