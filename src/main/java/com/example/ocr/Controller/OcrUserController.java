@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ocrUserApi/")
+@CrossOrigin()
 public class OcrUserController {
     @Autowired
     OcrUserRepository ocrUserRepository;
